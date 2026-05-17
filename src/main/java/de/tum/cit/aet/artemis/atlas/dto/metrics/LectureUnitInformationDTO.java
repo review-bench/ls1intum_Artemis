@@ -17,7 +17,11 @@ import de.tum.cit.aet.artemis.lecture.domain.LectureUnit;
  * @param type         the type of the lecture unit
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public record LectureUnitInformationDTO(long id, long lectureId, String lectureTitle, String name, ZonedDateTime releaseDate, Class<? extends LectureUnit> type) {
+public record LectureUnitInformationDTO(long id, long lectureId, String lectureTitle, String name, ZonedDateTime releaseDate, String type) {
+
+    public LectureUnitInformationDTO(long id, long lectureId, String lectureTitle, String name, ZonedDateTime releaseDate, Class<? extends LectureUnit> type) {
+        this(id, lectureId, lectureTitle, name, releaseDate, type != null ? type.getName() : null);
+    }
 
     /**
      * Creates a LectureUnitInformationDTO from a LectureUnit.
@@ -25,8 +29,8 @@ public record LectureUnitInformationDTO(long id, long lectureId, String lectureT
      * @param lectureUnit the LectureUnit to create the DTO from
      * @return the created DTO
      */
-    public static <L extends LectureUnit> LectureUnitInformationDTO of(L lectureUnit) {
+    public static LectureUnitInformationDTO of(LectureUnit lectureUnit) {
         return new LectureUnitInformationDTO(lectureUnit.getId(), lectureUnit.getLecture().getId(), lectureUnit.getLecture().getTitle(), lectureUnit.getName(),
-                lectureUnit.getReleaseDate(), lectureUnit.getClass());
+                lectureUnit.getReleaseDate(), lectureUnit.getClass().getName());
     }
 }
