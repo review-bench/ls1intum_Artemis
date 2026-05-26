@@ -109,13 +109,13 @@ export class CourseDashboardService {
 
     private mapToLectureUnitType(type: string): LectureUnitType {
         switch (type) {
-            case 'de.tum.cit.aet.artemis.lecture.domain.AttachmentVideoUnit':
+            case LectureUnitType.ATTACHMENT_VIDEO:
                 return LectureUnitType.ATTACHMENT_VIDEO;
-            case 'de.tum.cit.aet.artemis.lecture.domain.ExerciseUnit':
+            case LectureUnitType.EXERCISE:
                 return LectureUnitType.EXERCISE;
-            case 'de.tum.cit.aet.artemis.lecture.domain.TextUnit':
+            case LectureUnitType.TEXT:
                 return LectureUnitType.TEXT;
-            case 'de.tum.cit.aet.artemis.lecture.domain.OnlineUnit':
+            case LectureUnitType.ONLINE:
                 return LectureUnitType.ONLINE;
             default:
                 throw new Error(`Unknown lecture unit type: ${type}`);
