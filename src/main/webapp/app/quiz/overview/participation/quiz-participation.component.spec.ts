@@ -566,7 +566,7 @@ describe('QuizParticipationComponent - live mode', () => {
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('#missed-deadline-message')).toBeNull();
-        expect(fixture.nativeElement.querySelector('#quiz-header')).not.toBeNull();
+        expect(fixture.nativeElement.querySelector('.quiz-content')).not.toBeNull();
     });
 
     it('should not show missed deadline message when student effectively submitted', () => {
@@ -578,7 +578,7 @@ describe('QuizParticipationComponent - live mode', () => {
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('#missed-deadline-message')).toBeNull();
-        expect(fixture.nativeElement.querySelector('#quiz-header')).not.toBeNull();
+        expect(fixture.nativeElement.querySelector('.quiz-content')).not.toBeNull();
     });
 
     it('should not show missed deadline message when deadline has not passed', () => {
@@ -588,7 +588,7 @@ describe('QuizParticipationComponent - live mode', () => {
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('#missed-deadline-message')).toBeNull();
-        expect(fixture.nativeElement.querySelector('#quiz-header')).not.toBeNull();
+        expect(fixture.nativeElement.querySelector('.quiz-content')).not.toBeNull();
     });
 });
 
