@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, computed, inject, input, output, viewChild } from '@angular/core';
+import { Component, computed, inject, input, output, viewChild } from '@angular/core';
 import { SortService } from 'app/foundation/service/sort.service';
 import dayjs from 'dayjs/esm';
 import { Exercise, ExerciseType, IncludedInOverallScore, getCourseFromExercise } from 'app/exercise/shared/entities/exercise/exercise.model';
@@ -68,6 +68,7 @@ export class ExerciseHeadersInformationComponent {
     private sortService = inject(SortService);
     private serverDateService = inject(ArtemisServerDateService);
 
+    /** Captured once: the server time used as the reference point for all relative/absolute date displays. */
     private readonly now = this.serverDateService.now();
 
     readonly resultHistoryDropdown = viewChild(ResultHistoryDropdownComponent);
@@ -77,19 +78,6 @@ export class ExerciseHeadersInformationComponent {
     readonly IncludedInOverallScore = IncludedInOverallScore;
     readonly dayjs = dayjs;
 
-    readonly exercise = input.required<Exercise>();
-    readonly studentParticipation = input<StudentParticipation>();
-    readonly course = input<Course>();
-    readonly submissionPolicy = input<SubmissionPolicy>();
-    readonly sortedHistoryResultsInput = input<Result[] | undefined>();
-    readonly isPractice = input<boolean>(false);
-    readonly athenaEnabled = input<boolean>(false);
-    readonly feedbackRequestLimit = input<number>(DEFAULT_ATHENA_FEEDBACK_REQUEST_LIMIT);
-
-    readonly sortedHistoryResults = computed(() => {
-        const results = this.sortedHistoryResultsInput() ?? getAllResultsOfAllSubmissions(this.studentParticipation()?.submissions);
-        return this.sortService.sortByProperty(Array.from(results), 'id', false);
-    });
     readonly exercise = input.required<Exercise>();
     readonly studentParticipation = input<StudentParticipation>();
     /** Explicitly provided course; falls back to the exercise's own course via {@link resolvedCourse}. */
